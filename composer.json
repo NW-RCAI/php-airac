@@ -1,0 +1,34 @@
+{
+    "name": "getsky/airac",
+    "type": "library",
+    "description": "AIRAC generator",
+    "keywords": [
+        "AIRAC",
+        "aero"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JimmDiGrizli",
+            "email": "getmansk-y@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.3.*",
+        "squizlabs/php_codesniffer": "1.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.9.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "GetSky\\AIRAC\\": "src/"
+        }
+    }
+}
