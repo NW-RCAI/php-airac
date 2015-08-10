@@ -101,5 +101,4 @@ class Producer
 
         return $name = $airac->format('y') . sprintf("%02d", $number);
     }
-
 }
