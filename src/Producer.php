@@ -99,6 +99,6 @@ class Producer
         }
         $airac->modify('+28 day');
 
-        return $name = $airac->format('y') . sprintf("%02d", $number);
+        return $airac->format('y') . sprintf("%02d", $number);
     }
 }
