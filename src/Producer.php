@@ -33,7 +33,7 @@ class Producer
      *
      * @param \DateTime $date
      *
-     * @return \DateTime
+     * @return Airac
      */
     public function next(\DateTime $date)
     {
@@ -45,7 +45,7 @@ class Producer
      *
      * @param \DateTime $date
      *
-     * @return \DateTime
+     * @return Airac
      */
     public function now(\DateTime $date)
     {
@@ -57,7 +57,7 @@ class Producer
      *
      * @param \DateTime $date
      *
-     * @return \DateTime
+     * @return Airac
      */
     public function last(\DateTime $date)
     {
@@ -70,15 +70,36 @@ class Producer
      * @param \DateTime $date
      * @param $step
      *
-     * @return \DateTime
+     * @return Airac
      */
     private function circle(\DateTime $date, $step)
     {
         $countCircle = floor((($date->getTimestamp() - $this->bearing->getTimestamp()) / (60 * 60 *24)) / 28) + $step;
-        $airac = clone $this->bearing;
-        $airac->modify(($countCircle * 28) . ' day');
+        $date = clone $this->bearing;
+        $date->modify(($countCircle * 28) . ' day');
 
-        return $airac;
+        return new Airac($date, $this->calcNumber($date));
+    }
+
+    /**
+     *Calculated number of AIRAC.
+     *
+     * @param \DateTime $date
+     *
+     * @return string
+     */
+    private function calcNumber(\DateTime $date)
+    {
+        $year = \DateTime::createFromFormat('!Y', $date->format('Y'));
+        $airac = clone $date;
+        $number = 0;
+        while ($airac >= $year) {
+            $number++;
+            $airac->modify('-28 day');
+        }
+        $airac->modify('+28 day');
+
+        return $name = $airac->format('y') . sprintf("%02d", $number);
     }
 
 }
