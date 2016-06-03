@@ -88,17 +88,11 @@ class Producer
      *
      * @return string
      */
-    private function calcNumber(\DateTime $date)
+  function calcNumber(\DateTime $date)
     {
         $year = \DateTime::createFromFormat('!Y', $date->format('Y'));
-        $airac = clone $date;
-        $number = 0;
-        while ($airac >= $year) {
-            $number++;
-            $airac->modify('-28 day');
-        }
-        $airac->modify('+28 day');
-
-        return $airac->format('y') . sprintf("%02d", $number);
+        $number = 1 + floor($year->diff($date)->days / 28);
+        
+        return $year->format('y') . sprintf("%02d", $number);
     }
 }
