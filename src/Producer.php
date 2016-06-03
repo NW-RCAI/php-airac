@@ -88,7 +88,7 @@ class Producer
      *
      * @return string
      */
-  function calcNumber(\DateTime $date)
+    private function calcNumber(\DateTime $date)
     {
         $year = \DateTime::createFromFormat('!Y', $date->format('Y'));
         $number = 1 + floor($year->diff($date)->days / 28);
