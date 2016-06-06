@@ -74,7 +74,7 @@ class Producer
      */
     private function circle(\DateTime $date, $step)
     {
-        $countCircle = floor((($date->getTimestamp() - $this->bearing->getTimestamp()) / (60 * 60 *24)) / 28) + $step;
+        $countCircle = floor($date->diff($this->bearing)->days / 28) + $step;
         $date = clone $this->bearing;
         $date->modify(($countCircle * 28) . ' day');
 
