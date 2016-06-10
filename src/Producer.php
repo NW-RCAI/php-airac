@@ -74,8 +74,9 @@ class Producer
      */
     private function circle(\DateTime $date, $step)
     {
-        $positive = ($date > $this->bearing) ? 1 : -1;
-        $countCircle = $positive * floor($date->diff($this->bearing)->days / 28) + $step;
+        $positive = ($date >= $this->bearing) ? 1 : -1;
+        $days = $date->diff($this->bearing)->days;
+        $countCircle = $positive * floor($days / 28) + $step - (($positive < 0 && $days % 28 != 0) ? 1 : 0);
         $date = clone $this->bearing;
         $date->modify(($countCircle * 28) . ' day');
 
