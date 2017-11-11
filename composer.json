@@ -1,7 +1,7 @@
 {
     "name": "getsky/airac",
     "type": "library",
-    "description": "AIRAC generator",
+    "description": "AIRAC generation",
     "keywords": [
         "AIRAC",
         "aero"
@@ -9,8 +9,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "JimmDiGrizli",
-            "email": "getmansk-y@yandex.ru"
+            "name": "Alexander Getmanskii",
+            "email": "alexander.get87@gmail.com"
         }
     ],
     "require": {
