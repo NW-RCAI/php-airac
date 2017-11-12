@@ -1,26 +1,38 @@
 phpAIRAC
 ========
-[![Build Status](https://travis-ci.org/GetSky/php-airac.svg)](https://travis-ci.org/GetSky/php-airac) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=master)
+## master 
+[![Build Status](https://travis-ci.org/GetSky/php-airac.svg?branch=master)](https://travis-ci.org/GetSky/php-airac) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=master)
+## 1.0 
+[![Build Status](https://travis-ci.org/GetSky/php-airac.svg?branch=1.0)](https://travis-ci.org/GetSky/php-airac) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/quality-score.png?b=1.0)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=1.0) [![Code Coverage](https://scrutinizer-ci.com/g/GetSky/php-airac/badges/coverage.png?b=1.0)](https://scrutinizer-ci.com/g/GetSky/php-airac/?branch=1.0)
 
-This generator helps you to count the date [AIRAC](https://en.wikipedia.org/wiki/Aeronautical_Information_Publication#AIRAC_effective_dates_.2828-day_cycle.29). t's very easy:
+This generator helps you to count the date [AIRAC](https://en.wikipedia.org/wiki/Aeronautical_Information_Publication#AIRAC_effective_dates_.2828-day_cycle.29). it's very easy:
+
 ```php
 <?php
 use GetSky\AIRAC\Producer;
 
 $producer = new Producer();
 
-$nextAirac = $producer->next(new DateTime('2015-01-10')); // return Airac with DateTime 2015-02-05 and number 1502
-$lastAirac = $producer->last(new DateTime('2015-01-10')); // return Airac with DateTime 2015-01-08 and number 1501
-$nowAirac = $producer->last(new DateTime('2014-12-20'));  // return Airac with DateTime 2014-12-11 and number 1413
-```
+$nextAirac = $producer->next(new DateTime('2018-01-10')); 
+// return Airac with DateTime 2018-02-01 and number 1802
+
+$lastAirac = $producer->last(new DateTime('2018-01-10')); 
+// return Airac with DateTime 2017-12-07 and number 1713
+
+$nowAirac = $producer->now(new DateTime('2018-04-05'));  
+// return Airac with DateTime 2018-03-29 and number 1804
+//```
 
 Installation
 ------------
 Run command:
+
 ```
 composer require getsky/airac
 ```
+
 Or add string in your composer.json:
+
 ```json
 "getsky/airac": "dev-master"
 ```
