@@ -21,7 +21,7 @@ $lastAirac = $producer->last(new DateTime('2018-01-10'));
 
 $nowAirac = $producer->now(new DateTime('2018-04-05'));  
 // return Airac with DateTime 2018-03-29 and number 1804
-//```
+```
 
 Installation
 ------------
