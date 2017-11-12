@@ -62,7 +62,6 @@ class ProducerTest extends PHPUnit_Framework_TestCase
     public function testNowDateAirac(\DateTime $date, \DateTime $airac, \DateTime $airacNext, $number, \DateTime $bearing = null)
     {
         $producer = new Producer($bearing);
-        var_dump($producer->now($date)->getDateEnd());
         $this->assertSame($producer->now($date)->getDateStart()->getTimestamp(), $airac->getTimestamp());
         $this->assertSame($producer->now($date)->getDate()->getTimestamp(), $airac->getTimestamp());
         $this->assertSame($producer->now($date)->getDateEnd()->getTimestamp(), $airacNext->getTimestamp());
