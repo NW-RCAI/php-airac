@@ -36,16 +36,7 @@ class Airac
     {
         return $this->dateStart;
     }
-    
-    /**
-     * @deprecated Use getDataStart()
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->dateStart;
-    }
-    
+
     /**
      * @return \DateTime
      */
