@@ -9,9 +9,9 @@ This generator helps you to count the date [AIRAC](https://en.wikipedia.org/wiki
 
 ```php
 <?php
-use GetSky\AIRAC\Producer;
+use GetSky\AIRAC\AiracProducer;
 
-$producer = new Producer();
+$producer = new AiracProducer();
 
 $nextAirac = $producer->next(new DateTime('2018-01-10')); 
 // return Airac with DateTime 2018-02-01 and number 1802
@@ -21,6 +21,16 @@ $lastAirac = $producer->last(new DateTime('2018-01-10'));
 
 $nowAirac = $producer->now(new DateTime('2018-04-05'));  
 // return Airac with DateTime 2018-03-29 and number 1804
+
+$nextAirac = $producer->nextByNumber('1802'); 
+// return Airac with DateTime 2018-02-01 and number 1802
+
+$lastAirac = $producer->lastByNumber('1713'); 
+// return Airac with DateTime 2017-12-07 and number 1713
+
+$nowAirac = $producer->nowByNumber('1804');  
+// return Airac with DateTime 2018-03-29 and number 1804
+
 ```
 
 Installation
@@ -43,7 +53,7 @@ You can change the reference date to shift your cycles:
 
 ```php
 <?php
-use GetSky\AIRAC\Producer;
+use GetSky\AIRAC\AiracProducer;
 
-$producer = new Producer(new DateTime('2015-01-22')); // now cycle shifted by 14 days
+$producer = new AiracProducer(new DateTime('2015-01-22')); // now cycle shifted by 14 days
 ```
