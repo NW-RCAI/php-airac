@@ -114,7 +114,7 @@ class Producer
         $dateStart->modify(($countCircle * 28) . ' day');
         $dateEnd = clone $dateStart;
         $dateEnd->modify('28 day');
-        
+
         return new Airac($dateStart, $dateEnd, $this->calcNumber($dateStart));
     }
 
@@ -128,10 +128,10 @@ class Producer
      */
     private function circleByNumber(string $number, int $step): Airac
     {
-        $date = \DateTime::createFromFormat('!y', substr($number, 0, 2));
-        if ($date === false) {
+        if (preg_match("/[0-9]{4}/", $number) === 0) {
             throw new AiracNumberValidationException("Number '$number' isn't correct AIRAC.");
         }
+        $date = \DateTime::createFromFormat('!y', substr($number, 0, 2));
 
         return $this->circle($date, $step + substr($number, 2, 2));
     }
