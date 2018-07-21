@@ -128,13 +128,9 @@ class Producer
      */
     private function circleByNumber(string $number, int $step): Airac
     {
-        if (preg_match("/[0-9]{4}/", $number) === 0) {
-            throw new AiracNumberValidationException("Number '$number' isn't correct AIRAC.");
-        }
-
         $date = \DateTime::createFromFormat('!y', substr($number, 0, 2));
-        if ($date === false) {
-            throw new AiracNumberValidationException("It is impossible to extract the year of the cycle '$number'.");
+        if (preg_match("/[0-9]{4}/", $number) === 0 || $date === false) {
+            throw new AiracNumberValidationException("Number '$number' isn't correct AIRAC.");
         }
 
         return $this->circle($date, $step + substr($number, 2, 2));
