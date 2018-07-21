@@ -11,20 +11,26 @@ use GetSky\AIRAC\AiracProducer;
 
 $producer = new AiracProducer();
 
-$nextAirac = $producer->next(new DateTime('2018-01-10'));
-// or
-$nextAirac = $producer->nextByNumber('1801'); 
-// return Airac with dateStart 2018-02-01 and number 1802
-
-$lastAirac = $producer->last(new DateTime('2018-01-10')); 
-// or
-$lastAirac = $producer->lastByNumber('1801'); 
-// return Airac with dateStart 2017-12-07 and number 1713
-
 $nowAirac = $producer->now(new DateTime('2018-04-05'));
 // or
 $nowAirac = $producer->nowByNumber('1804');  
 // return Airac with dateStart 2018-03-29 and number 1804
+
+$nextAirac = $producer->next(new DateTime('2018-01-10'));
+// or
+$nextAirac = $producer->nextByNumber('1801'); 
+// or
+$airac = $producer->now(new DateTime('2018-01-10'));
+$nextAirac = $producer->nextByAirac($airac); 
+// return Airac with dateStart 2018-02-01 and number 1802
+
+$lastAirac = $producer->last(new DateTime('2018-01-10')); 
+// or
+$lastAirac = $producer->lastByNumber('1801');
+// or
+$airac = $producer->now(new DateTime('2018-01-10'));
+$nextAirac = $producer->lastByAirac($airac); 
+// return Airac with dateStart 2017-12-07 and number 1713
 ```
 
 Installation
