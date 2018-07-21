@@ -53,6 +53,17 @@ class Producer
     }
 
     /**
+     * Get next AIRAC date.
+     *
+     * @param Airac $airac
+     * @return Airac
+     */
+    public function nextByAirac(Airac $airac): Airac
+    {
+        return $this->circle($airac->getDateStart(), 1);
+    }
+
+    /**
      * Get current AIRAC date.
      *
      * @param \DateTime $date
@@ -96,6 +107,17 @@ class Producer
     public function lastByNumber(string $number): Airac
     {
         return $this->circleByNumber($number, -1);
+    }
+
+    /**
+     * Get last AIRAC date.
+     *
+     * @param Airac $airac
+     * @return Airac
+     */
+    public function lastByAirac(Airac $airac): Airac
+    {
+        return $this->circle($airac->getDateStart(), -1);
     }
 
     /**

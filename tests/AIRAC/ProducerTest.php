@@ -101,6 +101,23 @@ class ProducerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider lastDateProviderForAirac
+     * @param DateTime $airac
+     * @param DateTime $airacNext
+     * @param $number
+     * @param $lastNumber
+     * @param DateTime $bearing
+     */
+    public function testLastDateAiracByAirac(\DateTime $airac, \DateTime $airacNext, $lastNumber, \DateTime $bearing = null)
+    {
+        $producer = new AiracProducer($bearing);
+        $cAirac = new \GetSky\AIRAC\Airac($airacNext, $airac, $lastNumber);
+        $this->assertSame($producer->lastByAirac($cAirac)->getDateStart()->getTimestamp(), $airac->getTimestamp());
+        $this->assertSame($producer->lastByAirac($cAirac)->getDateEnd()->getTimestamp(), $airacNext->getTimestamp());
+        $this->assertSame($producer->lastByAirac($cAirac)->getNumber(), $lastNumber);
+    }
+
+    /**
      * @dataProvider nextDateProviderForNumber
      * @param DateTime $airac
      * @param DateTime $airacNext
@@ -115,6 +132,23 @@ class ProducerTest extends PHPUnit_Framework_TestCase
         $this->assertSame($producer->nextByNumber($number)->getDateStart()->getTimestamp(), $airac->getTimestamp());
         $this->assertSame($producer->nextByNumber($number)->getDateEnd()->getTimestamp(), $airacNext->getTimestamp());
         $this->assertSame($producer->nextByNumber($number)->getNumber(), $nextNumber);
+    }
+
+    /**
+     * @dataProvider nextDateProviderForAirac
+     * @param DateTime $startAirac
+     * @param DateTime $airac
+     * @param DateTime $airacNext
+     * @param $nextNumber
+     * @param DateTime|null $bearing
+     */
+    public function testNextDateAiracByAirac(\DateTime $startAirac, \DateTime $airac, \DateTime $airacNext, $nextNumber, \DateTime $bearing = null)
+    {
+        $producer = new AiracProducer($bearing);
+        $cAirac = new \GetSky\AIRAC\Airac($startAirac, $airacNext, $nextNumber);
+        $this->assertSame($producer->nextByAirac($cAirac)->getDateStart()->getTimestamp(), $airac->getTimestamp());
+        $this->assertSame($producer->nextByAirac($cAirac)->getDateEnd()->getTimestamp(), $airacNext->getTimestamp());
+        $this->assertSame($producer->nextByAirac($cAirac)->getNumber(), $nextNumber);
     }
 
     /**
@@ -165,6 +199,18 @@ class ProducerTest extends PHPUnit_Framework_TestCase
         ];
     }
 
+    public function lastDateProviderForAirac()
+    {
+        return [
+            [new DateTime('2019-12-05'), new DateTime('2020-01-02'), '1913'],
+            [new DateTime('2019-12-05'), new DateTime('2020-01-02'), '1913', new DateTime('2019-12-05')],
+            [new DateTime('2019-12-05'), new DateTime('2020-01-02'), '1913', new DateTime('2020-01-30')],
+            [new DateTime('2019-12-05'), new DateTime('2020-01-02'), '1913', new DateTime('2020-01-02')],
+            [new DateTime('2014-11-13'), new DateTime('2014-12-11'), '1412'],
+            [new DateTime('2014-12-11'), new DateTime('2015-01-08'), '1413'],
+        ];
+    }
+
     public function nextDateProviderForNumber()
     {
         return [
@@ -174,6 +220,18 @@ class ProducerTest extends PHPUnit_Framework_TestCase
             [new DateTime('2020-02-27'), new DateTime('2020-03-26'), '2002', '2003', new DateTime('2020-01-02')],
             [new DateTime('2015-02-05'), new DateTime('2015-03-05'), '1501', '1502'],
             [new DateTime('2015-03-05'), new DateTime('2015-04-02'), '1502', '1503'],
+        ];
+    }
+
+    public function nextDateProviderForAirac()
+    {
+        return [
+            [new DateTime('2020-01-30'), new DateTime('2020-02-27'), new DateTime('2020-03-26'), '2003'],
+            [new DateTime('2020-01-30'), new DateTime('2020-02-27'), new DateTime('2020-03-26'), '2003', new DateTime('2019-12-05')],
+            [new DateTime('2020-01-30'), new DateTime('2020-02-27'), new DateTime('2020-03-26'), '2003', new DateTime('2020-01-30')],
+            [new DateTime('2020-01-30'), new DateTime('2020-02-27'), new DateTime('2020-03-26'), '2003', new DateTime('2020-01-02')],
+            [new DateTime('2015-02-04'), new DateTime('2015-02-05'), new DateTime('2015-03-05'), '1502'],
+            [new DateTime('2015-03-04'), new DateTime('2015-03-05'), new DateTime('2015-04-02'), '1503'],
         ];
     }
 
