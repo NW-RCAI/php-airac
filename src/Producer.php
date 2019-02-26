@@ -15,6 +15,7 @@ class Producer
 
     /**
      * @param \DateTime|null $bearing
+     * @throws \Exception
      */
     public function __construct(\DateTime $bearing = null)
     {
