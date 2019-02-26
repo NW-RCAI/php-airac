@@ -25,6 +25,7 @@ class ProducerTest extends PHPUnit_Framework_TestCase
      * @param DateTime $airacNext
      * @param string $number
      * @param DateTime $bearing
+     * @throws Exception
      */
     public function testNextDateAirac(\DateTime $date, \DateTime $airac, \DateTime $airacNext, $number, \DateTime $bearing = null)
     {
@@ -41,6 +42,7 @@ class ProducerTest extends PHPUnit_Framework_TestCase
      * @param DateTime $airacNext
      * @param $number
      * @param DateTime $bearing
+     * @throws Exception
      */
     public function testLastDateAirac(\DateTime $date, \DateTime $airac, \DateTime $airacNext, $number, \DateTime $bearing = null)
     {
